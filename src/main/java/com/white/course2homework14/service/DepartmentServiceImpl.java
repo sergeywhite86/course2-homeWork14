@@ -10,15 +10,14 @@ import org.springframework.stereotype.Service;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-
 import static java.util.stream.Collectors.groupingBy;
 
 
 @Service
 @RequiredArgsConstructor
 public class DepartmentServiceImpl implements DepartmentService {
-    private final EmployeeRepositoryImpl repository;
 
+    private final EmployeeRepositoryImpl repository;
 
     @Override
     public Employee empWithMaxSalaryByDepartment(int departmentNumber) {
@@ -51,6 +50,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     public Map<Department, List<Employee>> findEmployeesByDepartment() {
         return repository.findAll().stream()
                 .collect(groupingBy(Employee::getDepartment));
+
     }
 
     private Department getDepartmentByNumber(int departmentNumber) {
@@ -58,5 +58,6 @@ public class DepartmentServiceImpl implements DepartmentService {
         if (departmentNumber >= sizeArrDepartments) throw new EmployeeNotFound();
         return Department.values()[departmentNumber];
     }
+
 }
 
