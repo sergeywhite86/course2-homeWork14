@@ -17,8 +17,6 @@ import java.util.List;
 public class InMemoryDataBase {
 
     private final List<Employee> data;
-    private final int MAXSIZE = 25;
-
     public InMemoryDataBase() {
         data = new ArrayList<>();
         initDB();

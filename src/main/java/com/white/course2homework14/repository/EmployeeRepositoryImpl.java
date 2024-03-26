@@ -5,26 +5,25 @@ import com.white.course2homework14.entitys.Employee;
 import com.white.course2homework14.exceptions.EmployeeNotFound;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 
 @Getter
 @RequiredArgsConstructor
-@Component
+@Repository
 public class EmployeeRepositoryImpl implements EmployeeRepository {
     private final InMemoryDataBase dataBase;
-
-
     @Override
-    public void add(Employee employee) {
+    public Employee add(Employee employee) {
         dataBase.getData().add(employee);
+        return employee;
     }
 
     @Override
-    public void delete(Employee employee) {
-        dataBase.getData().remove(employee);
+    public boolean delete(Employee employee) {
+       return dataBase.getData().remove(employee);
     }
 
     @Override
@@ -46,8 +45,4 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         return dataBase.getData().contains(employee);
     }
 
-    @Override
-    public boolean isNotFullDb() {
-        return dataBase.getMAXSIZE() >= dataBase.getData().size();
-    }
 }
